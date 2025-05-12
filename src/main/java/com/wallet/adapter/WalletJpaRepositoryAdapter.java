@@ -26,4 +26,5 @@ public class WalletJpaRepositoryAdapter implements WalletRepository {
         WalletEntity entity = mapper.toEntity(wallet);
         return mapper.toDomain(repository.save(entity));
     }
+
 }
