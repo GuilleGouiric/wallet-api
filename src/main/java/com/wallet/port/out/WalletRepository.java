@@ -8,4 +8,5 @@ public interface WalletRepository {
 
     Optional<Wallet> findByOwnerId(Long ownerId);
     Wallet save(Wallet wallet);
+    Wallet findById(Long id);
 }

@@ -15,6 +15,10 @@ public class ApiErrorException extends RuntimeException{
         this.error = error;
     }
 
+    public ApiErrorException(ApiError error){
+        this(new ErrorDTO(error));
+    }
+
     public ApiErrorException(ApiError apiError, String param){
         this(new ErrorDTO(apiError,param));
     }

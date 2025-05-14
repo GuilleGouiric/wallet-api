@@ -6,6 +6,7 @@ import com.wallet.adapter.repository.sql.WalletJpaRepository;
 import com.wallet.adapter.repository.sql.entity.WalletEntity;
 import com.wallet.adapter.repository.sql.mapper.WalletEntityMapper;
 import com.wallet.domain.Wallet;
+import com.wallet.exception.ApiErrorException;
 import mock.domain.WalletMock;
 import mock.entity.WalletEntityMock;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -36,7 +38,7 @@ public class WalletJpaRepositoryAdapterTest {
     }
 
     @Test
-    public void testFindOwnerByIdWalletFound(){
+    public void testFindByOwnerIdWalletFound(){
 
         when(repository.findByOwnerId(anyLong())).thenReturn(Optional.of(WalletEntityMock.getEntity()));
         Optional<Wallet> actualWallet = walletRepository.findByOwnerId(123L);
@@ -46,7 +48,7 @@ public class WalletJpaRepositoryAdapterTest {
     }
 
     @Test
-    public void testFindOwnerByIdWalletNotFound(){
+    public void testFindByOwnerIdWalletNotFound(){
 
         when(repository.findByOwnerId(anyLong())).thenReturn(Optional.empty());
         Optional<Wallet> actualWallet = walletRepository.findByOwnerId(123L);
@@ -63,5 +65,23 @@ public class WalletJpaRepositoryAdapterTest {
         assertEquals(actualWallet, WalletMock.getWallet());
 
         verify(repository, times(1)).save(any(WalletEntity.class));
+    }
+
+    @Test
+    public void testFindByIdWalletFound(){
+
+        when(repository.findById(anyLong())).thenReturn(Optional.of(WalletEntityMock.getEntity()));
+        Wallet actualWallet = walletRepository.findById(123L);
+        assertEquals(actualWallet, WalletMock.getWallet());
+
+        verify(repository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    public void testFindByIdWalletNotFound(){
+
+        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(ApiErrorException.class, () -> walletRepository.findById(123L));
+        verify(repository, times(1)).findById(anyLong());
     }
 }
