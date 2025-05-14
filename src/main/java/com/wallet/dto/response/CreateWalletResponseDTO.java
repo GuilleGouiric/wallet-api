@@ -1,13 +1,18 @@
 package com.wallet.dto.response;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode
 public class CreateWalletResponseDTO {
 
     private Long id;
     private Long ownerId;
-    private LocalDate dateCreated;
+    private BigDecimal balance;
+    private String description;
+    private LocalDateTime dateCreated;
 }

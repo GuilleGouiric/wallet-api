@@ -11,4 +11,6 @@ public class CreateWalletRequestDTO {
     @NotNull(message = "Owner Id is required")
     private Long ownerId;
 
+    private String description;
+
 }
