@@ -10,7 +10,7 @@ PostgreSQL (Docker)
 H2 (para tests)
 
 ⚙️ How to Run the Application
-  1. Clone the repository : git clone https://github.com/tu-usuario/wallet-api.git
+  1. Clone the repository : git clone https://github.com/recargapay-dev/GuillermoGouiric.git
 
   2. Start the PostgreSQL database using Docker : docker compose up -d
    
